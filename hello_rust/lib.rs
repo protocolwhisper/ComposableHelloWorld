@@ -8,16 +8,14 @@ use alloc::string::String;
 
 
 use alloy_sol_types::{sol, SolCall, SolValue};
-use fluentbase_sdk::{ContextReader, ExecutionContext, LowLevelAPI, LowLevelSDK};
+use fluentbase_sdk::{derive_solidity_router, ContextReader, ExecutionContext, LowLevelAPI, LowLevelSDK};
 
 // Define a Solidity function that returns a greeting message
-sol! {
-    function greeting() external view returns (string);
-}
 
 // Define a struct to hold the execution context
 struct GREETING<'a>(&'a mut ExecutionContext);
 
+#[derive_solidity_router(with_main=true)]
 impl<'a> GREETING<'a> {
     // Function to return a greeting message
     fn greeting() -> &'static [u8] {
@@ -26,20 +24,6 @@ impl<'a> GREETING<'a> {
     }
 }
 
-// Function to deploy the contract
-#[cfg(not(feature = "std"))]
-#[no_mangle]
-#[cfg(target_arch = "wasm32")]
-pub extern "C" fn deploy() {}
 
-// Main function
-#[cfg(not(feature = "std"))]
-#[no_mangle]
-#[cfg(target_arch = "wasm32")]
-pub extern "C" fn main() {
-    // Directly call the greeting function
-    let output = GREETING::<'_>::greeting().to_vec().abi_encode();
 
-    // Write the output
-    LowLevelSDK::sys_write(&output);
-}
+
