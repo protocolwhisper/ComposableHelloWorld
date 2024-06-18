@@ -28,9 +28,11 @@ impl<'a, CR: ContextReader, AM: AccountManager> RouterAPI for ROUTER<'a, CR, AM>
     #[signature("function random() external view returns (uint256)")]
     fn random<SDK: SharedAPI>(&self) -> u64 {
         // Either way if we are usinf .block_number()
-        let seed = self.cr.block_timestamp();
-        let mut small_rng = SmallRng::seed_from_u64(seed);
-        small_rng.next_u64()
+        self.cr.block_timestamp()
+        
+
+        // let mut small_rng = SmallRng::seed_from_u64(seed);
+        // small_rng.next_u64()
     }
 }
 
@@ -42,6 +44,11 @@ impl<'a, CR: ContextReader, AM: AccountManager> ROUTER<'a, CR, AM> {
 
 basic_entrypoint!(ROUTER<'static, fluentbase_sdk::GuestContextReader, fluentbase_sdk::GuestAccountManager>);
 
+// 
+//  pnpm hardhat get-greeting --contract 0xDde063eBe8E85D666AD99f731B4Dbf8C98F29708
+// 
+
+// 
 // #[cfg(test)]
 // mod test {
 //     use super::*;
