@@ -12,6 +12,7 @@ use fluentbase_sdk::{
 use rand::rngs::SmallRng;
 use rand::SeedableRng;
 use rand::RngCore;
+use rand::Rng;
 
 #[derive(Contract)]
 struct ROUTER<'a, CR: ContextReader, AM: AccountManager> {
@@ -28,11 +29,10 @@ impl<'a, CR: ContextReader, AM: AccountManager> RouterAPI for ROUTER<'a, CR, AM>
     #[signature("function random() external view returns (uint256)")]
     fn random<SDK: SharedAPI>(&self) -> u64 {
         // Either way if we are usinf .block_number()
-        self.cr.block_timestamp()
-        
-
-        // let mut small_rng = SmallRng::seed_from_u64(seed);
-        // small_rng.next_u64()
+        let seed = self.cr.block_timestamp();
+        let mut small_rng = SmallRng::seed_from_u64(seed);
+        let random_number = small_rng.gen_range(1..15);
+        random_number
     }
 }
 
