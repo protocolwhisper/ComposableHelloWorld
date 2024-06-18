@@ -1,5 +1,4 @@
 import { task } from "hardhat/config";
-import { Signer } from "ethers";
 
 task("get-greeting", "Fetches the greeting from the deployed GreetingWithWorld contract")
   .addParam("contract", "The address of the deployed GreetingWithWorld contract")
@@ -12,5 +11,6 @@ task("get-greeting", "Fetches the greeting from the deployed GreetingWithWorld c
     );
 
     const greeting = await GreetingWithWorld.getGreeting();
-    console.log("Greeting:", greeting);
+    // Convert the BigInt to a string for display
+    console.log("Random Number:", greeting.toString());
   });

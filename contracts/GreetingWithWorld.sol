@@ -10,11 +10,11 @@ contract GreetingWithWorld {
         fluentGreetingContract = IFluentGreeting(_fluentGreetingContractAddress);
     }
 
-    function getGreeting() external view returns (string memory) {
-        // Call the greeting function from the WASM contract
-        string memory greeting = fluentGreetingContract.greeting();
+    function getGreeting() external view returns (uint256) {
+        // Call the random function from the fluentGreetingContract
+        uint256 randi = fluentGreetingContract.random();
         
-        // Append ", world" to the greeting
-        return string(abi.encodePacked(greeting, ", world"));
+        // Return the greeting value
+        return randi;
     }
 }
