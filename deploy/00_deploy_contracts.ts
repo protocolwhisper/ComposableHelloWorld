@@ -38,11 +38,11 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   );
 
 
-  // ---------------------
-  // Deploy GreetingWithWorld contract
-  // ---------------------
+  // // ---------------------
+  // // Deploy GreetingWithWorld contract
+  // // ---------------------
   console.log("Deploying GreetingWithWorld contract...");
-  const fluentGreetingContractAddress = "0xaca81583840b1bf2ddf6cde824ada250c1936b4d"; // Replace with the actual address if different
+  const fluentGreetingContractAddress = checkmateValidatorAddress // Replace with the actual address if different
 
   const greetingWithWorld = await deploy("GreetingWithWorld", {
     from: deployerAddress,

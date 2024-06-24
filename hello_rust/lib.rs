@@ -1,29 +1,31 @@
-#![cfg_attr(not(feature = "std"), no_std)] // Different runtime
-#![allow(dead_code)]
-
-extern crate alloc; // Smart pointers 
+#![cfg_attr(target_arch = "wasm32", no_std)]
+extern crate alloc;
 extern crate fluentbase_sdk;
 
-use alloc::string::String;
+use alloc::string::{String , ToString};
+use fluentbase_sdk::{
+    basic_entrypoint,
+    derive::{router, signature},
+    SharedAPI,
+};
 
+#[derive(Default)]
+struct ROUTER;
 
-use alloy_sol_types::{sol, SolCall, SolValue};
-use fluentbase_sdk::{derive_solidity_router, ContextReader, ExecutionContext, LowLevelAPI, LowLevelSDK};
+pub trait RouterAPI {
+    fn greeting<SDK: SharedAPI>(&self) -> String;
+}
 
-// Define a Solidity function that returns a greeting message
-
-// Define a struct to hold the execution context
-struct GREETING<'a>(&'a mut ExecutionContext);
-
-#[derive_solidity_router(with_main=true)]
-impl<'a> GREETING<'a> {
-    // Function to return a greeting message
-    fn greeting() -> &'static [u8] {
-        // Return the greeting message
-        "Hello".as_bytes()
+#[router(mode = "solidity")]
+impl RouterAPI for ROUTER {
+    #[signature("function greeting() external returns (string)")]
+    fn greeting<SDK: SharedAPI>(&self) -> String {
+        "Hello".into()
     }
 }
 
-
-
-
+impl ROUTER {
+    fn deploy<SDK: SharedAPI>(&self) {
+        // any custom deployment logic here
+    }
+}

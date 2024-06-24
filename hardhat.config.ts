@@ -13,12 +13,12 @@ const config: HardhatUserConfig = {
     localhost: {
       url: "https://rpc.dev.thefluent.xyz/",
       accounts: [DEPLOYER_PRIVATE_KEY],
+      chainId : 20993,
     },
     dev: {
       url: "https://rpc.dev.thefluent.xyz/",
-    },
-    hardhat: {
-      chainId: 1337,
+      accounts: [DEPLOYER_PRIVATE_KEY],
+      chainId : 20993,
     },
   },
   solidity: {
