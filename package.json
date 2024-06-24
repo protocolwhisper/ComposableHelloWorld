@@ -6,13 +6,9 @@
   "scripts": {
     "compile": "npx hardhat compile",
     "deploy": "npx hardhat deploy"
-  },
-  "keywords": [
-    "chess",
-    "puzzle",
-    "smart contract"
-  ],
-  "author": "d1r1",
+  }
+  ,
+  "author": "protocolwhisper",
   "license": "ISC",
   "devDependencies": {
     "@nomicfoundation/hardhat-ethers": "^3.0.0",

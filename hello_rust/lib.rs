@@ -2,7 +2,7 @@
 extern crate alloc;
 extern crate fluentbase_sdk;
 
-use alloc::string::{String , ToString};
+use alloc::string::{String, ToString};
 use fluentbase_sdk::{
     basic_entrypoint,
     derive::{router, signature},
@@ -20,7 +20,7 @@ pub trait RouterAPI {
 impl RouterAPI for ROUTER {
     #[signature("function greeting() external returns (string)")]
     fn greeting<SDK: SharedAPI>(&self) -> String {
-        "Hello".into()
+        "Hello".to_string()
     }
 }
 
@@ -29,3 +29,4 @@ impl ROUTER {
         // any custom deployment logic here
     }
 }
+basic_entrypoint!(ROUTER);

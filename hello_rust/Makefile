@@ -7,14 +7,14 @@ RUSTFLAGS := '-C link-arg=-zstack-size=131072 -C target-feature=+bulk-memory -C 
 WASM_TARGET := ./target/wasm32-unknown-unknown/release/greeting.wasm
 WASM_OUTPUT_DIR := bin
 WASM_OUTPUT_FILE := $(WASM_OUTPUT_DIR)/greeting.wasm
-WASM_WAT_FILE := $(WASM_OUTPUT_DIR)/greeting.wat
+#WASM_WAT_FILE := $(WASM_OUTPUT_DIR)/greeting.wat
 
 # Commands
 CARGO_BUILD := cargo build --release --target=wasm32-unknown-unknown --no-default-features
 RM := rm -rf
 MKDIR := mkdir -p
 CP := cp
-WASM2WAT := wasm2wat
+#WASM2WAT := wasm2wat
 
 # Targets
 all: build
@@ -27,7 +27,7 @@ build: prepare_output_dir
 	$(CP) $(WASM_TARGET) $(WASM_OUTPUT_FILE)
 
 	@echo "Converting wasm to wat..."
-	$(WASM2WAT) $(WASM_OUTPUT_FILE) > $(WASM_WAT_FILE)
+	
 
 prepare_output_dir:
 	@echo "Preparing the output directory..."
