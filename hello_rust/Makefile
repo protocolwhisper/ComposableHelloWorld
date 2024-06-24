@@ -26,17 +26,10 @@ build: prepare_output_dir
 	@echo "Copying the wasm file to the output directory..."
 	$(CP) $(WASM_TARGET) $(WASM_OUTPUT_FILE)
 
-	@echo "Converting wasm to wat..."
-	
-
 prepare_output_dir:
 	@echo "Preparing the output directory..."
 	$(RM) $(WASM_OUTPUT_DIR)
 	$(MKDIR) $(WASM_OUTPUT_DIR)
 
-clean:
-	@echo "Cleaning the project..."
-	$(RM) $(WASM_OUTPUT_DIR)
-	$(RM) ./target
 
-.PHONY: all build prepare_output_dir clean
+.PHONY: all build prepare_output_dir 
